@@ -49,3 +49,31 @@ int maxSubArray2(vector<int>& arr) {
 }
 
 // https://leetcode.com/problems/maximum-subarray/
+
+
+// To Print the subarray
+
+int maxSubarraySum(vector<int>& arr) {
+    int max = LONG_MIN;
+    int sum = 0;
+    int ans_st =0;
+    int ans_end=0;
+    for(int i=0;i<arr.size();i++){
+        int st = 0;
+        if(sum==0){
+            st = i;
+        }  
+        sum += arr[i];
+        if(sum>max){
+            max = sum;
+            ans_st = st, ans_end=i;
+        }
+        if(sum<0){
+            sum=0;
+        }
+    }
+    for(int i=ans_st;i<=ans_end;i++){
+        cout << arr[i] << " " ;
+    }
+    return max;
+}
