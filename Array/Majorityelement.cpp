@@ -68,7 +68,7 @@ int majorityElement2(vector<int>& nums){
     for(int i=0;i<n;i++){
         if(cnt==0){
             cnt = 1;
-            el = nums[i];   // <- fix
+            el = nums[i];   
         }
         else if(el==nums[i]){
             cnt++;
