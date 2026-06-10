@@ -44,3 +44,5 @@ void nextPermutation(vector<int>& arr) {
     }
     reverse(arr.begin() + ind + 1 , arr.end());
 }
+
+// https://leetcode.com/problems/next-permutation/description/ 
