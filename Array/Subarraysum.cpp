@@ -28,5 +28,6 @@ int subarraySum(vector<int>& arr, int k) {
     }
     return cnt;
 
+}
 
 // https://leetcode.com/problems/subarray-sum-equals-k/description/
