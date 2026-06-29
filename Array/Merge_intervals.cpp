@@ -79,4 +79,64 @@ vector<vector<int>> merge1(vector<vector<int>>& arr) {
   - Adjacent intervals (e.g., [1,4] and [4,5]) merge correctly.
 */
 
+vector<vector<int>> merge2(vector<vector<int>>& arr){
+    int n = arr.size();
+    sort(arr.begin(),arr.end());
+    vector<vector<int>> ans;
+
+    if(n==0){
+        return {};
+    }
+
+    int fstart = arr[0][0], fend = arr[0][1];
+    for(int i = 0;i<n;i++){
+        
+        int start = arr[i][0];
+        int end = arr[i][1];
+
+        if(start <= fend){
+            fend = max(fend,end);
+        }
+        else{
+            ans.push_back({fstart,fend});
+            fstart = start;
+            fend = end;
+        }
+    }
+    ans.push_back({fstart,fend});
+    return ans;
+}
+
+/*
+  Approach 2: Optimal Greedy + Sorting
+
+  Intuition:
+  - Sort the intervals by their starting time.
+  - Traverse the sorted intervals one by one.
+  - If the answer is empty or the current interval does not overlap
+    with the last merged interval, add it directly to the answer.
+  - Otherwise, merge the intervals by extending the end of the last
+    interval stored in the answer.
+  - The answer vector itself maintains the merged intervals, eliminating
+    the need for separate start/end variables.
+*/
+
+vector<vector<int>> merge2(vector<vector<int>>& arr){
+    int n = arr.size();
+    sort(arr.begin(),arr.end());
+    vector<vector<int>> ans;
+
+    for(int i=0;i<n;i++){
+        if(ans.empty() || arr[i][0] > ans.back()[1]){
+            ans.push_back(arr[i]);
+        }
+        else{
+            ans.back()[1] = max(ans.back()[1],arr[i][1]);
+        }
+    }
+    return ans;
+}
+
+
+
 // https://leetcode.com/problems/merge-intervals/
