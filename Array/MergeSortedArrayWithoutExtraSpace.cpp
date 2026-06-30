@@ -52,7 +52,12 @@ void merge1(vector<int>& arr1, int n, vector<int>& arr2, int m) {
         right++;
     }
     for(int i=0;i<n+m;i++){
-        arr1[i] = ans[i];
+        if(i<n){
+            arr1[i] = ans[i];
+        }
+        else{
+            arr2[i-n] = ans[i];
+        }
     }
 }
 
