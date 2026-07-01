@@ -39,16 +39,20 @@ long long getInversions(long long *arr, int n){
 
 
 /*
- Approach 2: Optimal (Merge Sort)
+ Approach 2: Optimal (Merge Sort with Inversion Counting)
 
  Intuition:
- - Use Merge Sort to recursively divide the array into two sorted halves.
- - While merging:
-   - If the left element is smaller, simply place it into the merged array.
+ - Use Merge Sort to recursively divide the array into two halves.
+ - Count inversions in the left half and right half separately.
+ - During the merge step:
+   - If the left element is smaller, place it into the temporary array.
    - Otherwise, the right element is smaller than all remaining elements in the
      left half (from left to mid), so each of them forms an inversion.
    - Add (mid - left + 1) to the inversion count.
- - Continue merging until the entire array becomes sorted.
+ - The total inversions are the sum of:
+     - Left half inversions
+     - Right half inversions
+     - Cross inversions counted during merging
 
  Time Complexity:
  - Merge Sort: O(n log n)
@@ -60,16 +64,18 @@ long long getInversions(long long *arr, int n){
 
  Edge Cases:
  - Returns 0 for an already sorted array.
- - Correctly counts maximum inversions for a reverse sorted array.
- - Handles duplicate elements without counting equal elements as inversions.
+ - Correctly counts the maximum number of inversions for a reverse sorted array.
+ - Handles duplicate elements correctly since equal elements are not counted as
+   inversions.
 */
 
-int cnt = 0;
 
-void merge(vector<int>& arr,int low, int mid, int high){
+int merge(vector<int>& arr,int low, int mid, int high){
     vector<int> temp;
     int left=low;
     int right=mid+1;
+    int cnt = 0;
+
     while(left<=mid && right<=high){
         if(arr[left]<=arr[right]){
             temp.push_back(arr[left]);
@@ -92,18 +98,20 @@ void merge(vector<int>& arr,int low, int mid, int high){
     for(int i = low; i<=high ; i++){
         arr[i]= temp[i-low];
     }
+    return cnt;
 }
-void ms(vector<int>& arr, int n, int low, int high){
-    if(low==high)return;
+int ms(vector<int>& arr, int n, int low, int high){
+    int cnt = 0;
+    if(low>=high)return cnt;
     int mid = (low+high)/2;
-    ms(arr,n,low,mid);
-    ms(arr,n,mid+1,high);
-    merge(arr,low,mid,high); 
+    cnt += ms(arr,n,low,mid);
+    cnt += ms(arr,n,mid+1,high);
+    cnt += merge(arr,low,mid,high); 
+    return cnt;
 }
 
 int numberOfInversions(vector<int>&arr, int n) {
-    ms(arr,n,0,n-1);
-    return cnt;
+    return ms(arr,n,0,n-1);
 }
 
 // https://www.naukri.com/code360/problems/number-of-inversions_6840276?leftPanelTabValue=PROBLEM
