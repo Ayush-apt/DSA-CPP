@@ -40,3 +40,6 @@ int upperBoundcpp(vector<int> arr, int n, int x) {
     int ans = upper_bound(arr.begin(),arr.end(),x) - arr.begin();
     return ans;
 }
+
+// https://www.naukri.com/code360/problems/lower-bound_8165382?leftPanelTabValue=PROBLEM 
+// https://www.naukri.com/code360/problems/implement-upper-bound_8165383
