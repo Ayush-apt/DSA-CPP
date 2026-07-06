@@ -1,6 +1,28 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
+ Approach 1: Binary Search (Iterative / Recursive)
+
+ Intuition:
+ - Since the array is sorted, compare the target with the middle element.
+ - If the middle element matches the target, return its index.
+ - If the target is greater, search the right half.
+ - Otherwise, search the left half.
+ - Repeat until the element is found or the search space becomes empty.
+
+ Time Complexity:
+ - O(log n) in both iterative and recursive approaches.
+
+ Space Complexity:
+ - Iterative: O(1)
+ - Recursive: O(log n) due to recursion stack.
+
+ Edge Cases:
+ - Returns -1 if the target is not present.
+ - Works for single-element arrays.
+ - Handles targets smaller than the first or larger than the last element.
+*/
 
 // Iterative Code
 
@@ -29,10 +51,10 @@ int binarysearch(vector<int>& arr, int low, int high, int target){
 
     if(arr[mid] == target) return mid;
     else if(target > arr[mid]){
-        binarysearch(arr, mid+1, high, target);
+        return binarysearch(arr, mid+1, high, target);
     }
     else{
-        binarysearch(arr, low, mid-1, target);
+        return binarysearch(arr, low, mid-1, target);
     }
 }
 
@@ -41,3 +63,5 @@ int search(vector<int>& arr, int target){
     return binarysearch(arr, 0, n-1, target);
 }
 
+
+// https://leetcode.com/problems/binary-search/

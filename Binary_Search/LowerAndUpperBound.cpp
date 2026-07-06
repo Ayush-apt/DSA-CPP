@@ -1,6 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+/*
+ Approach 1: Binary Search
+
+ Intuition:
+ - Lower Bound:
+   Find the first index whose value is greater than or equal to x.
+ - Upper Bound:
+   Find the first index whose value is strictly greater than x.
+ - Keep updating the answer whenever a valid candidate is found
+   and continue searching towards the left.
+
+ Time Complexity:
+ - O(log n)
+
+ Space Complexity:
+ - O(1)
+
+ Edge Cases:
+ - Returns n if no valid bound exists.
+ - Handles duplicate elements correctly.
+ - Works for targets outside the array range.
+*/
+
+
 int lowerBound(vector<int> arr, int n, int x) {
     int low = 0, high = n-1;
     int ans = n;
