@@ -103,4 +103,8 @@ vector<int> searchRange(vector<int>& arr, int target) {
     return {bs1(arr,n,target), bs2(arr,n,target)};
 }
 
+
 // https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/
+
+// To count Number of occurrences : End - Start + 1;
+// https://www.naukri.com/code360/problems/occurrence-of-x-in-a-sorted-array_630456?leftPanelTabValue=PROBLEM
