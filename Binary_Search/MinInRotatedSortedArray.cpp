@@ -35,6 +35,13 @@ int findMin(vector<int>& arr) {
 
     while(low <= high){
         int mid = low + (high - low)/2;
+
+        // search space is already sorted 
+        // then arr[low] will be always smaller in that space
+        if(arr[low] <= arr[high]){
+            min_num = min(min_num, arr[low]);
+        }
+        
         if(arr[low] <= arr[mid]){
             min_num = min(min_num,arr[low]);
             low = mid+1;
