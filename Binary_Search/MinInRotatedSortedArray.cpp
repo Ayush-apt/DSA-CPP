@@ -40,6 +40,7 @@ int findMin(vector<int>& arr) {
         // then arr[low] will be always smaller in that space
         if(arr[low] <= arr[high]){
             min_num = min(min_num, arr[low]);
+            break;
         }
         
         if(arr[low] <= arr[mid]){
