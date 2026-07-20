@@ -72,3 +72,5 @@ int splitArray(vector<int> &arr, int k)
 
 // https://leetcode.com/problems/split-array-largest-sum/
 // https://www.naukri.com/code360/problems/painter-s-partition-problem_1089557?leftPanelTabValue=PROBLEM
+
+
