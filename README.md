@@ -47,6 +47,11 @@ The goal of this repository is to improve my problem-solving skills, understand 
 
 </details>
 
+<details>
+<summary><strong>04. Strings</strong></summary>
+
+</details>
+
 ---
 
 ## What You'll Find
