@@ -49,7 +49,10 @@ The goal of this repository is to improve my problem-solving skills, understand 
 
 <details>
 <summary><strong>04. Strings</strong></summary>
-
+  
+- Easy Questions
+- Medium Questions
+  
 </details>
 
 ---
