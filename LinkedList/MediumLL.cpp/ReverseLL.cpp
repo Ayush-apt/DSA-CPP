@@ -42,7 +42,7 @@ class ListNode{
  - Correctly reverses lists of any length.
 */
 
-ListNode* reverseList(ListNode* head) {
+ListNode* reverseList1(ListNode* head) {
     ListNode* prev = NULL;
 
     ListNode* temp = head;
@@ -85,7 +85,7 @@ ListNode* reverseList(ListNode* head) {
  - Correctly reverses the links without creating a cycle.
 */
 
-ListNode* reverseList(ListNode* head) {
+ListNode* reverseList2(ListNode* head) {
 
     if(head == NULL || head->next == NULL){
         return head;
