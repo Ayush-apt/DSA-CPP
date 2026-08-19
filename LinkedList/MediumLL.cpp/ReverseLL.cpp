@@ -91,7 +91,7 @@ ListNode* reverseList2(ListNode* head) {
         return head;
     }
 
-    ListNode* newHead = reverseList(head->next);
+    ListNode* newHead = reverseList2(head->next);
     
     ListNode* front = head->next;
     front->next = head;
