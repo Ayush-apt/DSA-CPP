@@ -19,7 +19,7 @@ vector<int> majorityElement1(vector<int>& arr){
     int n = arr.size();
     unordered_map<int,int> mpp;
     vector<int>ls;
-    int mm = n/3;
+    int mm = (n/3)+1;
 
     for(int i=0;i<n;i++){
         mpp[arr[i]]++;
