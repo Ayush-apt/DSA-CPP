@@ -26,6 +26,34 @@ public:
     }
 };
 
+/*
+Approach 1: Traversal + Direct Deletion
+
+Intuition:
+
+- Traverse the doubly linked list using a temporary pointer.
+- If the current node contains k, remove it from the list.
+- If the node is the head, update head to the next node.
+- Connect the previous node with the next node using prev and next pointers.
+- Continue traversal using the saved nextNode after deletion.
+
+Time Complexity:
+
+- O(n), where n is the number of nodes in the linked list.
+
+Space Complexity:
+
+- O(1), since no extra data structure is used.
+
+Edge Cases:
+
+- Empty list.
+- Single-node list.
+- All nodes contain k.
+- k occurs at the head, middle, or tail.
+- k does not exist in the list.
+*/
+
 Node * deleteAllOccurrences(Node* head, int k) {
     
     Node* temp = head;
@@ -43,8 +71,8 @@ Node * deleteAllOccurrences(Node* head, int k) {
             if(nextNode != NULL) nextNode->prev = prevNode;
             if(prevNode != NULL) prevNode->next = nextNode;
 
-            free(temp);
-            temp = temp->next;
+            delete(temp);
+            temp = nextNode;
         }
         else{
             temp = temp->next;
