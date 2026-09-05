@@ -108,20 +108,35 @@ vector<vector<int>> merge2(vector<vector<int>>& arr){
 }
 
 /*
-  Approach 2: Optimal Greedy + Sorting
+ Approach: Sorting + Merging Intervals
 
-  Intuition:
-  - Sort the intervals by their starting time.
-  - Traverse the sorted intervals one by one.
-  - If the answer is empty or the current interval does not overlap
-    with the last merged interval, add it directly to the answer.
-  - Otherwise, merge the intervals by extending the end of the last
-    interval stored in the answer.
-  - The answer vector itself maintains the merged intervals, eliminating
-    the need for separate start/end variables.
+ Intuition:
+ - Sort all intervals based on their starting points.
+ - Traverse the sorted intervals one by one.
+ - If the current interval does not overlap with the last interval in ans,
+   add it as a new interval.
+ - If they overlap, merge them by updating the ending point of the last
+   interval with the maximum of both ending points.
+ - Since the intervals are sorted, all possible overlapping intervals
+   will be processed consecutively.
+
+ Time Complexity:
+ - O(n log n), due to sorting the intervals.
+ - The traversal takes O(n).
+
+ Space Complexity:
+ - O(n), for storing the merged intervals in ans.
+ - Sorting may also use additional space depending on the implementation.
+
+ Edge Cases:
+ - Empty list of intervals.
+ - Only one interval.
+ - No overlapping intervals.
+ - All intervals overlap.
+ - Intervals that completely contain other intervals.
 */
 
-vector<vector<int>> merge2(vector<vector<int>>& arr){
+vector<vector<int>> merge3(vector<vector<int>>& arr){
     int n = arr.size();
     sort(arr.begin(),arr.end());
     vector<vector<int>> ans;
