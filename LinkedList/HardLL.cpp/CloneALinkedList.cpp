@@ -14,6 +14,32 @@ public:
     }
 };
 
+/*
+ Approach: Hash Map + Deep Copy
+
+ Intuition:
+ - Traverse the original linked list and create a new node for every node.
+ - Store the mapping between each original node and its corresponding
+   copied node in an unordered_map.
+ - Traverse the list again and connect the next and random pointers of
+   each copied node using the stored mappings.
+ - Return the copied head node.
+
+ Time Complexity:
+ - O(n), where n is the number of nodes.
+ - The list is traversed twice, and hash map operations take O(1) average time.
+
+ Space Complexity:
+ - O(n), for storing the mapping between original and copied nodes.
+
+ Edge Cases:
+ - Empty linked list.
+ - Single-node list.
+ - random pointer is NULL.
+ - random pointer points to itself.
+ - random pointer points to any other node in the list.
+*/
+
 Node* copyRandomList(Node* head) {
     Node* temp = head;
     unordered_map<Node*, Node*>mpp;
@@ -35,3 +61,4 @@ Node* copyRandomList(Node* head) {
     return mpp[head];
 }
 
+https://leetcode.com/problems/copy-list-with-random-pointer/
