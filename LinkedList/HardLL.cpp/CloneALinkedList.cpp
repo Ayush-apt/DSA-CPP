@@ -61,4 +61,68 @@ Node* copyRandomList(Node* head) {
     return mpp[head];
 }
 
+/*
+ Approach: In-Place Interleaving + Pointer Adjustment
+
+ Intuition:
+ - First, create a copy of every node and insert it immediately after
+   its original node.
+ - This creates an alternating structure:
+   original -> copy -> original -> copy ...
+ - In the second traversal, set each copied node's random pointer.
+   Since the copy is directly after the original, temp->random->next
+   gives the corresponding copied random node.
+ - Finally, separate the original and copied lists.
+ - Restore the original list while constructing the deep-copied list.
+
+ Time Complexity:
+ - O(n), where n is the number of nodes.
+ - The list is traversed three times.
+
+ Space Complexity:
+ - O(1) extra space, excluding the newly created copied nodes.
+ - No hash map or other auxiliary data structure is used.
+
+ Edge Cases:
+ - Empty linked list.
+ - Single-node list.
+ - random pointer is NULL.
+ - random pointer points to itself.
+ - random pointer points to another node.
+*/
+
+Node* copyRandomList(Node* head) {
+
+    if(head == NULL) return head;
+
+    Node* temp = head;
+    while(temp){
+        Node* copyNode = new Node(temp->val);
+        copyNode->next = temp->next;
+        temp->next = copyNode;
+        temp = temp->next->next;
+    }
+
+    temp = head;
+    while(temp){
+        Node* copyNode = temp->next;
+        if(temp->random != NULL)copyNode->random = temp->random->next;
+        temp = temp->next->next;
+    }
+
+    Node* dummyNode = new Node(-1);
+    Node* res = dummyNode;
+    temp = head;
+
+    while(temp){
+        res->next = temp->next;
+        temp->next = temp->next->next;
+
+        res = res->next;
+        temp = temp->next;
+    }
+
+    return dummyNode->next;
+}
+
 https://leetcode.com/problems/copy-list-with-random-pointer/
