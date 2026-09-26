@@ -6,21 +6,20 @@ using namespace std;
 
  Intuition:
  - At every index, there are two choices for the current element:
-   either exclude it or include it in the current subset.
- - First, make the recursive call without adding nums[ind].
- - Then, add nums[ind] to ds and make the recursive call again.
- - After the recursive call, remove the element using backtracking so that
-   ds is restored for the next choice.
+   either include it in the subset or exclude it.
+ - First, include nums[ind] in ds and recursively process the next index.
+ - After returning, remove the element using backtracking.
+ - Then, exclude nums[ind] and recursively process the next index.
  - When ind reaches the end of the array, the current ds represents one
    complete subset, so add it to ans.
 
  Time Complexity:
- - O(2^n * n), where 2^n subsets are generated and each subset can take
-   O(n) time to copy into the answer.
+ - O(2^n * n), where 2^n subsets are generated and copying each subset
+   into ans can take O(n).
 
  Space Complexity:
- - O(n), for the recursion stack and the temporary subset ds.
- - O(2^n * n) is additionally required for storing the final answer.
+ - O(n), for the recursion stack and temporary subset ds.
+ - O(2^n * n) additionally for storing all subsets in ans.
 
  Edge Cases:
  - Empty array gives one subset: {}.
@@ -37,11 +36,11 @@ void solve(int ind, vector<int>& nums, vector<int>& ds,
         return;
     }
 
-    solve(ind + 1, nums, ds, ans);
-
     ds.push_back(nums[ind]);
     solve(ind + 1, nums, ds, ans);
+
     ds.pop_back();
+    solve(ind + 1, nums, ds, ans);
 }
 
 vector<vector<int>> subsets(vector<int>& nums) {
