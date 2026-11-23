@@ -1,5 +1,4 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
 void printSubsequencesWithSumK(int index, vector<int>& arr, vector<int>& current, int currentSum, int k) {
