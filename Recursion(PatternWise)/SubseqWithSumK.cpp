@@ -1,37 +1,28 @@
-#include <bits/stdc++.h>
+include <bits/stdc++.h>
 using namespace std;
 
-void printSubsequencesWithSumK(int index, vector<int>& arr, vector<int>& current, int currentSum, int k) {
-    // Base Case: Reached the end of the array
-    if (index == arr.size()) {
-        if (currentSum == k) {
-            cout << "[ ";
-            for (int num : current) {
-                cout << num << " ";
-            }
-            cout << "]" << endl;
+int cnt = 0;
+
+void subWithK(int idx ,vector<int>&arr ,vector<int>ds, int sum, int target){
+    
+    if(idx == arr.size()){
+        if(sum == target){
+            cnt++;
         }
         return;
     }
 
-    // Choice 1: PICK the current element
-    current.push_back(arr[index]);
-    printSubsequencesWithSumK(index + 1, arr, current, currentSum + arr[index], k);
+    ds.push_back(arr[idx]);
+    subWithK(idx+1, arr, ds, sum + arr[idx], target);
 
-    // Backtrack: Remove the element before exploring the next choice
-    current.pop_back();
+    ds.pop_back();
+    subWithK(idx+1, arr, ds, sum, target);
 
-    // Choice 2: NOT PICK the current element
-    printSubsequencesWithSumK(index + 1, arr, current, currentSum, k);
 }
 
-int main() {
-    vector<int> arr = {1, 2, 1};
-    int k = 2;
-    vector<int> current;
+int numSubseq(vector<int>&arr ,int target) {
+    vector<int>ds;
+    subWithK(0, arr, ds, 0, target);
 
-    cout << "Subsequences with sum " << k << ":" << endl;
-    printSubsequencesWithSumK(0, arr, current, 0, k);
-
-    return 0;
+    return cnt;
 }
